@@ -62,3 +62,31 @@ class ButtonGoogle extends StatelessWidget {
     );
   }
 }
+
+class ButtonConfirmBook extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 250,
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(width: 3),
+          primary: Colors.redAccent,
+          onPrimary: Colors.white,
+          shadowColor: Colors.transparent,
+          elevation: 3,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+          // minimumSize: Size(100, 40),
+        ),
+        onPressed: () {},
+        child: Text(
+          "Confirm",
+          style: TextStyle(
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../add_items/add_items_page.dart';
 import '../app_screens/button.dart';
 import 'inputfield_search.dart';
 import 'items.dart';
@@ -12,13 +13,33 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawer(
+          backgroundColor: Colors.redAccent,
+          width: 200,
           child: Column(
-            children: [Items()],
+            children: [
+              SizedBox(
+                height: 70,
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(60))),
+              ),
+            ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           tooltip: "Add item",
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddItems(),
+                ));
+          },
           backgroundColor: Colors.amber,
           foregroundColor: Colors.black,
           child: const Icon(Icons.add),
@@ -77,35 +98,54 @@ class HomePage extends StatelessWidget {
                       ),
                       Expanded(
                           child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.black, width: 3),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(60),
-                            )),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Text("Recommend"),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Items(),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Items()
-                              ],
-                            ),
-                          ],
-                        ),
-                      ))
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 3),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(60),
+                                  )),
+                              child: ListView(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text("Recommend"),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Items(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Items()
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Items(),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Items()
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )))
                     ],
                   ),
                 ),

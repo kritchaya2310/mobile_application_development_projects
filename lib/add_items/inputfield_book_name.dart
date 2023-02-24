@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class InputFieldSearch extends StatelessWidget {
-  const InputFieldSearch({super.key});
+class InputFieldBookName extends StatelessWidget {
+  const InputFieldBookName({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(4),
-      width: 250,
+      width: 300,
       height: 60,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -16,9 +16,9 @@ class InputFieldSearch extends StatelessWidget {
       ),
       child: const TextField(
         decoration: InputDecoration(
-            hintText: "Search",
+            hintText: "     Enter book name",
             hintStyle: TextStyle(color: Colors.grey),
-            prefixIcon: Icon(Icons.search),
+            // prefixIcon: Icon(Icons.search),
             border: InputBorder.none),
       ),
     );
