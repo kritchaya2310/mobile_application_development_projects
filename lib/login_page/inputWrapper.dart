@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../forget_password_page/forget_password_page.dart';
-import '/signup_page/signup_page.dart';
 import '../app_screens/button.dart';
-import 'inputfield.dart';
 
 class InputWrapper extends StatelessWidget {
   @override

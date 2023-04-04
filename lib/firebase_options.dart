@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '656398088309',
     projectId: 'en843305-mobile-app-dev-2022',
     storageBucket: 'en843305-mobile-app-dev-2022.appspot.com',
-    iosClientId: '656398088309-5gfgdn05c78f8gcakjug5cfqk424iirg.apps.googleusercontent.com',
+    iosClientId:
+        '656398088309-5gfgdn05c78f8gcakjug5cfqk424iirg.apps.googleusercontent.com',
     iosBundleId: 'com.example.mobileApplicationDevelopmentProjects',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '656398088309',
     projectId: 'en843305-mobile-app-dev-2022',
     storageBucket: 'en843305-mobile-app-dev-2022.appspot.com',
-    iosClientId: '656398088309-5gfgdn05c78f8gcakjug5cfqk424iirg.apps.googleusercontent.com',
+    iosClientId:
+        '656398088309-5gfgdn05c78f8gcakjug5cfqk424iirg.apps.googleusercontent.com',
     iosBundleId: 'com.example.mobileApplicationDevelopmentProjects',
   );
 }

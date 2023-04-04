@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application_development_projects/login_page/login_page.dart';
-import 'package:mobile_application_development_projects/signup_page/password.dart';
-import 'package:mobile_application_development_projects/signup_page/username.dart';
 
 // import 'dropdown_category.dart';
 import '../app_screens/button.dart';

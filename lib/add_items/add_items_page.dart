@@ -1,16 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-import '../app_screens/button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 import '../homepage/homepage.dart';
-import 'inputfield_book_contact.dart';
-import 'inputfield_book_description.dart';
-import 'inputfield_book_name.dart';
 
 class AddItems extends StatefulWidget {
   @override
@@ -59,6 +53,7 @@ class _AddItemsState extends State<AddItems> {
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+
   @override
   void dispose() {
     _bNameController.dispose();
@@ -135,23 +130,70 @@ class _AddItemsState extends State<AddItems> {
                     SizedBox(
                       height: 30,
                     ),
-                    TextField(
-                      controller: _bNameController,
-                      decoration: InputDecoration(hintText: 'Title'),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      width: 300,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(60)),
+                      ),
+                      child: TextField(
+                        controller: _bNameController,
+                        decoration: InputDecoration(
+                          hintText: "     Book name",
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                        ),
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(hintText: 'Description'),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      width: 300,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                      ),
+                      child: TextField(
+                        maxLines: null,
+                        controller: _descriptionController,
+                        decoration: InputDecoration(
+                            hintText: "     Description",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            // prefixIcon: Icon(Icons.search),
+                            border: InputBorder.none),
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      controller: _contactController,
-                      decoration: InputDecoration(hintText: 'Contact'),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      width: 300,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: TextField(
+                        maxLines: 2,
+                        controller: _contactController,
+                        decoration: InputDecoration(
+                            hintText: "     Contact",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            // prefixIcon: Icon(Icons.search),
+                            border: InputBorder.none),
+                      ),
                     ),
                     SizedBox(
                       height: 20,

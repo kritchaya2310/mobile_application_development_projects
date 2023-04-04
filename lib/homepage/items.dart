@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../books_details_page/book_datails_page.dart';
 
@@ -23,14 +23,6 @@ class Items extends StatelessWidget {
 
         var books = snapshot.data!.docs;
 
-        Column abc() {
-          return Column(
-            children: [
-              for (int i = 1; i <= books.length; i++) ...[Items()],
-            ],
-          );
-        }
-
         return Column(
           children: books.map((book) {
             var bookname = book.get('b_name');
@@ -53,7 +45,7 @@ class Items extends StatelessWidget {
                       border: Border.all(color: Colors.black, width: 3),
                     ),
                     child: Image.network(
-                      book.get('p_url'),
+                      book.get('b_image_url'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -76,16 +68,3 @@ class Items extends StatelessWidget {
     );
   }
 }
-
-// class ABC extends StatelessWidget {
-//   const ABC({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         for (int i = 1; i <= 1; i++) ...[Items()],
-//       ],
-//     );
-//   }
-// }

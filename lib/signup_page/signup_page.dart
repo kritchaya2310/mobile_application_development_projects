@@ -5,7 +5,6 @@ import 'package:mobile_application_development_projects/signup_page/username.dar
 
 // import 'dropdown_category.dart';
 import '../app_screens/button.dart';
-import '../homepage/homepage.dart';
 import 'email.dart';
 
 class SignUpPage extends StatelessWidget {

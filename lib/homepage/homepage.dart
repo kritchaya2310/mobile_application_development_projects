@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application_development_projects/homepage/test.dart';
 
 import '../add_items/add_items_page.dart';
 import 'drawer.dart';
@@ -86,10 +85,6 @@ class HomePage extends StatelessWidget {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              // border: Border.all(color: Colors.black, width: 3),
-                              // borderRadius: BorderRadius.only(
-                              //   topLeft: Radius.circular(60),
-                              // ),
                             ),
                             child: ListView(
                               children: [

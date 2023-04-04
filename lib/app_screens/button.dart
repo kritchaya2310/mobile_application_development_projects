@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mobile_application_development_projects/login_page/login_page.dart';
 
 import '../homepage/homepage.dart';
-import '../add_items/add_items_page.dart';
 
 class ButtonLogin extends StatelessWidget {
   @override
@@ -67,6 +65,9 @@ class ButtonGoogle extends StatelessWidget {
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       var userRef = firestore.collection("users").doc(reslut.displayName);
       await userRef.set({"displayName": reslut.displayName});
+
+      // var userseller = firestore.collection("books").doc(reslut.displayName);
+      // await userseller.set({"b_seller": reslut.displayName});
     } catch (error) {
       print(error);
     }
