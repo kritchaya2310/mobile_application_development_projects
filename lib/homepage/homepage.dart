@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application_development_projects/homepage/test.dart';
 
 import '../add_items/add_items_page.dart';
-import '../app_screens/button.dart';
+import 'drawer.dart';
 import 'inputfield_search.dart';
 import 'items.dart';
-import 'items_search.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,14 +20,11 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 70,
               ),
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black, width: 3),
-                    borderRadius: BorderRadius.all(Radius.circular(60))),
+              DrawerBookmark(),
+              SizedBox(
+                height: 70,
               ),
+              DrawerSetting()
             ],
           ),
         ),
@@ -46,7 +43,7 @@ class HomePage extends StatelessWidget {
         ),
         body: Container(
             width: double.infinity,
-            decoration: BoxDecoration(color: Colors.white),
+            decoration: BoxDecoration(color: Colors.blue),
             child: Column(children: <Widget>[
               SizedBox(
                 height: 50,
@@ -54,16 +51,25 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        border: Border.all(color: Colors.black, width: 3),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                  Builder(
+                    builder: (context) => GestureDetector(
+                      onTap: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            border: Border.all(color: Colors.black, width: 3),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        child: Icon(Icons.menu),
+                      ),
+                    ),
                   ),
                   SizedBox(
-                    width: 50,
+                    width: 40,
                   ),
                   InputFieldSearch(),
                 ],
@@ -72,82 +78,36 @@ class HomePage extends StatelessWidget {
                 height: 30,
               ),
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue[400],
-                      border: Border.all(color: Colors.black, width: 3),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                      )),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ItemsSearch(),
-                          ItemsSearch(),
-                          ItemsSearch(),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Expanded(
-                          child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border:
-                                      Border.all(color: Colors.black, width: 3),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(60),
-                                  )),
-                              child: ListView(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text("Recommend"),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Items(),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Items()
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Items(),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Items()
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 30,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )))
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              // border: Border.all(color: Colors.black, width: 3),
+                              // borderRadius: BorderRadius.only(
+                              //   topLeft: Radius.circular(60),
+                              // ),
+                            ),
+                            child: ListView(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text("Recommend"),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    for (int i = 1; i <= 1; i++) ...[Items()],
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )))
+                  ],
                 ),
               ),
             ])));

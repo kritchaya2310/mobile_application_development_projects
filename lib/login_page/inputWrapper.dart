@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../forget_password_page/forget_password_page.dart';
+import '/signup_page/signup_page.dart';
 import '../app_screens/button.dart';
 import 'inputfield.dart';
 
@@ -16,35 +18,52 @@ class InputWrapper extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            child: InputFieldLogin(),
+            // child: InputFieldLogin(),
           ),
           SizedBox(
             height: 40,
           ),
-          Text(
-            "Forget Password?",
-            style: TextStyle(color: Colors.black),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => const ForgetPasswordPage()),
+          //     );
+          //   },
+          //   child: Text(
+          //     "Forget Password?",
+          //     style: TextStyle(color: Colors.black),
+          //   ),
+          // ),
           SizedBox(
             height: 40,
           ),
-          Button(),
+          ButtonGoogle(),
           SizedBox(
             height: 30,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Don't have an account?"),
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Sign up",
-                style: TextStyle(color: Colors.red),
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Text("Don't have an account?"),
+          //     SizedBox(
+          //       width: 10,
+          //     ),
+          //     InkWell(
+          //       onTap: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => const SignUpPage()),
+          //         );
+          //       },
+          //       child: Text(
+          //         "Sign up",
+          //         style: TextStyle(color: Colors.red),
+          //       ),
+          //     )
+          //   ],
+          // ),
         ],
       ),
     );

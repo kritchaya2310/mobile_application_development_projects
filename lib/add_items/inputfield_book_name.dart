@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class InputFieldBookName extends StatelessWidget {
-  const InputFieldBookName({super.key});
+class InputFieldBookName extends StatefulWidget {
+  const InputFieldBookName({Key? key}) : super(key: key);
+
+  @override
+  _InputFieldBookNameState createState() => _InputFieldBookNameState();
+}
+
+class _InputFieldBookNameState extends State<InputFieldBookName> {
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +21,16 @@ class InputFieldBookName extends StatelessWidget {
         border: Border.all(color: Colors.black, width: 3),
         borderRadius: BorderRadius.all(Radius.circular(60)),
       ),
-      child: const TextField(
+      child: TextField(
+        controller: _controller,
         decoration: InputDecoration(
-            hintText: "     Enter book name",
-            hintStyle: TextStyle(color: Colors.grey),
-            // prefixIcon: Icon(Icons.search),
-            border: InputBorder.none),
+          hintText: "     Enter book name",
+          hintStyle: TextStyle(color: Colors.grey),
+          border: InputBorder.none,
+        ),
+        onChanged: (value) {
+          setState(() {});
+        },
       ),
     );
   }

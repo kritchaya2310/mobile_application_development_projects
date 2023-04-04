@@ -11,14 +11,12 @@ class Header extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Center(
-            child: Text(
-              "ยืมเปล่า",
-              style: TextStyle(color: Colors.black, fontSize: 40),
-            ),
-          ),
-          SizedBox(
-            height: 40,
-          )
+              child: Image(
+            image: AssetImage('images/Goodbook_logo.png'),
+          )),
+          // SizedBox(
+          //   height: 40,
+          // )
         ],
       ),
     );

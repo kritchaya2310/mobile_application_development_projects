@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobile_application_development_projects/login_page/login_page.dart';
 
 import '../homepage/homepage.dart';
+import '../add_items/add_items_page.dart';
 
-class Button extends StatelessWidget {
+class ButtonLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,6 +42,41 @@ class Button extends StatelessWidget {
 }
 
 class ButtonGoogle extends StatelessWidget {
+  const ButtonGoogle({super.key});
+
+  void googleLogin() async {
+    print("googleLogin method Called");
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    try {
+      var reslut = await _googleSignIn.signIn();
+      if (reslut == null) {
+        return;
+      }
+
+      final userData = await reslut.authentication;
+      final credential = GoogleAuthProvider.credential(
+          accessToken: userData.accessToken, idToken: userData.idToken);
+      var finalResult =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print("Result $reslut");
+      print(reslut.displayName);
+      print(reslut.email);
+      print(reslut.photoUrl);
+
+      // Upload display name to Firestore
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+      var userRef = firestore.collection("users").doc(reslut.displayName);
+      await userRef.set({"displayName": reslut.displayName});
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> logout() async {
+    await GoogleSignIn().disconnect();
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -52,9 +93,15 @@ class ButtonGoogle extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
           // minimumSize: Size(100, 40),
         ),
-        onPressed: () {},
+        onPressed: () {
+          googleLogin();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        },
         child: Text(
-          "Sign in with Google",
+          "Login with Google",
           style: TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         ),
@@ -63,7 +110,7 @@ class ButtonGoogle extends StatelessWidget {
   }
 }
 
-class ButtonConfirmBook extends StatelessWidget {
+class ButtonSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -80,9 +127,80 @@ class ButtonConfirmBook extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
           // minimumSize: Size(100, 40),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        },
         child: Text(
-          "Confirm",
+          "Sign Up",
+          style: TextStyle(
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonSignOut extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 250,
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(width: 3),
+          primary: Colors.redAccent,
+          onPrimary: Colors.white,
+          shadowColor: Colors.transparent,
+          elevation: 3,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+          // minimumSize: Size(100, 40),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        },
+        child: Text(
+          "Sign Out",
+          style: TextStyle(
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonForgetPassword extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 250,
+      height: 50,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          side: BorderSide(width: 3),
+          primary: Colors.redAccent,
+          onPrimary: Colors.white,
+          shadowColor: Colors.transparent,
+          elevation: 3,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+          // minimumSize: Size(100, 40),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        },
+        child: Text(
+          "Sent to my email",
           style: TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
         ),

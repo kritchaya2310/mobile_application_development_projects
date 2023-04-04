@@ -10,14 +10,15 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(color: Colors.white),
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 80,
-            ),
+            // SizedBox(
+            //   height: 80,
+            // ),
             Header(),
             Expanded(
               child: Container(
@@ -31,28 +32,28 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InputWrapper(),
-                    Expanded(
-                        child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black, width: 3),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(60),
-                          )),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text("or"),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ButtonGoogle()
-                        ],
-                      ),
-                    ))
+                    // Expanded(
+                    //     child: Container(
+                    //   width: double.infinity,
+                    //   decoration: BoxDecoration(
+                    //       color: Colors.white,
+                    //       border: Border.all(color: Colors.black, width: 3),
+                    //       borderRadius: BorderRadius.only(
+                    //         topLeft: Radius.circular(60),
+                    //       )),
+                    //   child: Column(
+                    //     children: [
+                    //       SizedBox(
+                    //         height: 20,
+                    //       ),
+                    //       Text("or"),
+                    //       SizedBox(
+                    //         height: 20,
+                    //       ),
+                    //       ButtonGoogle()
+                    //     ],
+                    //   ),
+                    // ))
                   ],
                 ),
               ),
