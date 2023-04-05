@@ -39,34 +39,36 @@ class ButtonLogin extends StatelessWidget {
 }
 
 class ButtonGoogle extends StatelessWidget {
-  const ButtonGoogle({super.key});
+  const ButtonGoogle({Key? key}) : super(key: key);
 
-  void googleLogin() async {
+  Future<void> googleLogin(BuildContext context) async {
     print("googleLogin method Called");
     GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
-      var reslut = await _googleSignIn.signIn();
-      if (reslut == null) {
+      var result = await _googleSignIn.signIn();
+      if (result == null) {
         return;
       }
 
-      final userData = await reslut.authentication;
+      final userData = await result.authentication;
       final credential = GoogleAuthProvider.credential(
           accessToken: userData.accessToken, idToken: userData.idToken);
       var finalResult =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      print("Result $reslut");
-      print(reslut.displayName);
-      print(reslut.email);
-      print(reslut.photoUrl);
+      print("Result $result");
+      print(result.displayName);
+      print(result.email);
+      print(result.photoUrl);
 
       // Upload display name to Firestore
       FirebaseFirestore firestore = FirebaseFirestore.instance;
-      var userRef = firestore.collection("users").doc(reslut.displayName);
-      await userRef.set({"displayName": reslut.displayName});
+      var userRef = firestore.collection("users").doc(result.displayName);
+      await userRef.set({"displayName": result.displayName});
 
-      // var userseller = firestore.collection("books").doc(reslut.displayName);
-      // await userseller.set({"b_seller": reslut.displayName});
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
     } catch (error) {
       print(error);
     }
@@ -84,23 +86,18 @@ class ButtonGoogle extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          side: BorderSide(width: 3),
+          side: const BorderSide(width: 3),
           primary: Colors.redAccent,
           onPrimary: Colors.white,
           shadowColor: Colors.transparent,
           elevation: 3,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-          // minimumSize: Size(100, 40),
         ),
         onPressed: () {
-          googleLogin();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+          googleLogin(context);
         },
-        child: Text(
+        child: const Text(
           "Login with Google",
           style: TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
@@ -144,6 +141,11 @@ class ButtonSignUp extends StatelessWidget {
 }
 
 class ButtonSignOut extends StatelessWidget {
+  Future<void> logout() async {
+    await GoogleSignIn().disconnect();
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -165,6 +167,8 @@ class ButtonSignOut extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => const LoginPage()),
           );
+          logout();
+          print("Logout...");
         },
         child: Text(
           "Sign Out",
