@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../homepage/homepage.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class BookDetailsPage extends StatelessWidget {
   const BookDetailsPage({
@@ -19,6 +20,22 @@ class BookDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+    void _sendNotificationToOwner() {
+      String ownerToken =
+          "YOUR_OWNER_TOKEN_HERE"; // replace with owner's FCM token
+
+      _firebaseMessaging.sendMessage(
+        to: ownerToken,
+        data: {
+          "click_action": "FLUTTER_NOTIFICATION_CLICK",
+          "book_name": bookName,
+          "message": "Someone confirmed your book!",
+        },
+      );
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.redAccent,
@@ -30,6 +47,7 @@ class BookDetailsPage extends StatelessWidget {
               ));
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Confirm Book!')));
+          _sendNotificationToOwner(); // send notification to owner
         },
         label: Row(
           children: [Icon(Icons.done), Text('Confirm')],
