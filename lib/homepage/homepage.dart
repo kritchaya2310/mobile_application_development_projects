@@ -30,10 +30,10 @@ class _HomePageState extends State<HomePage> {
         width: 200,
         child: Column(
           children: [
-            SizedBox(
-              height: 70,
-            ),
-            DrawerBookmark(),
+            // SizedBox(
+            //   height: 70,
+            // ),
+            // DrawerBookmark(),
             SizedBox(
               height: 70,
             ),
@@ -123,8 +123,22 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } else {
-      return ItemSearch(
-        query: _searchQuery,
+      return ListView.builder(
+        itemCount: 1,
+        itemBuilder: (context, index) => Column(
+          children: [
+            Text("Searched"),
+            SizedBox(
+              height: 20,
+            ),
+            ItemSearch(
+              query: _searchQuery,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       );
     }
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mobile_application_development_projects/app_screens/send_noti.dart';
 import 'package:mobile_application_development_projects/login_page/login_page.dart';
 import '../homepage/homepage.dart';
 
@@ -101,7 +102,7 @@ class _ButtonGoogleState extends State<ButtonGoogle> {
       Navigator.pop(context); // Dismiss the loading dialog
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const SendNoti()),
       );
     } catch (error) {
       print(error);
