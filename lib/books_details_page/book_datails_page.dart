@@ -8,12 +8,14 @@ class BookDetailsPage extends StatelessWidget {
     required this.description,
     required this.contact,
     required this.imageUrl,
+    required this.user,
   }) : super(key: key);
 
   final String bookName;
   final String description;
   final String contact;
   final String imageUrl;
+  final String user;
 
   @override
   Widget build(BuildContext context) {
@@ -153,14 +155,14 @@ class BookDetailsPage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 165,
+                left: 110,
                 top: 330,
                 child: Align(
                   child: SizedBox(
-                    width: 100,
+                    // width: 100,
                     height: 800,
                     child: Text(
-                      "Seller's name",
+                      user,
                     ),
                   ),
                 ),
@@ -170,12 +172,21 @@ class BookDetailsPage extends StatelessWidget {
                 top: 380,
                 child: Align(
                   child: SizedBox(
-                    width: 320,
-                    height: 800,
-                    child: Text(
-                      description,
-                    ),
-                  ),
+                      width: 320,
+                      height: 100,
+                      child: Container(
+                        padding: const EdgeInsets.all(7),
+                        width: 300,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black, width: 3),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Text(
+                          description,
+                        ),
+                      )),
                 ),
               ),
               Positioned(
@@ -184,9 +195,19 @@ class BookDetailsPage extends StatelessWidget {
                 child: Align(
                   child: SizedBox(
                     width: 320,
-                    height: 800,
-                    child: Text(
-                      contact,
+                    height: 100,
+                    child: Container(
+                      padding: const EdgeInsets.all(7),
+                      width: 300,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      child: Text(
+                        contact,
+                      ),
                     ),
                   ),
                 ),

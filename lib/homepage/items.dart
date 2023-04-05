@@ -27,6 +27,7 @@ class Items extends StatelessWidget {
             var bookname = book.get('b_name');
             var description = book.get('b_desc');
             var contact = book.get('b_contact');
+            var username = book.get('b_user');
 
             return Column(
               children: [
@@ -40,6 +41,7 @@ class Items extends StatelessWidget {
                                 description: description,
                                 contact: contact,
                                 imageUrl: book.get('b_image_url'),
+                                user: username,
                               )),
                     ),
                   },
@@ -56,7 +58,7 @@ class Items extends StatelessWidget {
                     ),
                   ),
                   title: Text(bookname),
-                  // subtitle: Text(book.get('p_seller')), // <-----------------
+                  subtitle: Text(book.get('b_user')), // <-----------------
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                     side: BorderSide(color: Colors.black, width: 3),

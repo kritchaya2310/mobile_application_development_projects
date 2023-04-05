@@ -41,6 +41,7 @@ class ItemSearch extends StatelessWidget {
                   var bookname = book.get('b_name');
                   var description = book.get('b_desc');
                   var contact = book.get('b_contact');
+                  var username = book.get('b_user');
 
                   return Column(
                     children: [
@@ -54,6 +55,7 @@ class ItemSearch extends StatelessWidget {
                                 description: description,
                                 contact: contact,
                                 imageUrl: book.get('b_image_url'),
+                                user: username,
                               ),
                             ),
                           ),

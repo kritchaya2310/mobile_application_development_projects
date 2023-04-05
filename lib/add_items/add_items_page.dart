@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,6 +30,7 @@ class _AddItemsState extends State<AddItems> {
   final TextEditingController _contactController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final String? email = FirebaseAuth.instance.currentUser?.email;
 
   Future<void> _uploadData() async {
     final String bookName = _bNameController.text.trim();
@@ -58,6 +60,7 @@ class _AddItemsState extends State<AddItems> {
         'b_desc': description,
         'b_contact': contact,
         'b_image_url': imageUrl,
+        'b_user': email,
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
