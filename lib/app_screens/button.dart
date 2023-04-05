@@ -38,15 +38,46 @@ class ButtonLogin extends StatelessWidget {
   }
 }
 
-class ButtonGoogle extends StatelessWidget {
+class ButtonGoogle extends StatefulWidget {
   const ButtonGoogle({Key? key}) : super(key: key);
 
+  @override
+  _ButtonGoogleState createState() => _ButtonGoogleState();
+}
+
+class _ButtonGoogleState extends State<ButtonGoogle> {
+  bool _isLoading = false;
+
   Future<void> googleLogin(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    print("#####################################################");
     print("googleLogin method Called");
+    print("#####################################################");
+
     GoogleSignIn _googleSignIn = GoogleSignIn();
     try {
       var result = await _googleSignIn.signIn();
       if (result == null) {
+        setState(() {
+          _isLoading = false;
+        });
+        Navigator.pop(context); // Dismiss the loading dialog
+        print("#####################################################");
+        print("Login Fail...");
+        print("#####################################################");
+
         return;
       }
 
@@ -56,15 +87,18 @@ class ButtonGoogle extends StatelessWidget {
       var finalResult =
           await FirebaseAuth.instance.signInWithCredential(credential);
       print("Result $result");
-      print(result.displayName);
-      print(result.email);
-      print(result.photoUrl);
+      print("#####################################################");
+      print("♦ DisplayName: ${result.displayName}");
+      print("♦ Email: ${result.email}");
+      print("♦ ImageUrl: ${result.photoUrl}");
+      print("#####################################################");
 
       // Upload display name to Firestore
       FirebaseFirestore firestore = FirebaseFirestore.instance;
       var userRef = firestore.collection("users").doc(result.displayName);
       await userRef.set({"displayName": result.displayName});
 
+      Navigator.pop(context); // Dismiss the loading dialog
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
@@ -72,11 +106,34 @@ class ButtonGoogle extends StatelessWidget {
     } catch (error) {
       print(error);
     }
+
+    setState(() {
+      _isLoading = false;
+    });
   }
 
-  Future<void> logout() async {
+  Future<void> logout(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
     await GoogleSignIn().disconnect();
     FirebaseAuth.instance.signOut();
+
+    Navigator.pop(context); // Dismiss the loading dialog
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -97,11 +154,15 @@ class ButtonGoogle extends StatelessWidget {
         onPressed: () {
           googleLogin(context);
         },
-        child: const Text(
-          "Login with Google",
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
-        ),
+        child: _isLoading
+            ? const SizedBox.shrink() // Hide button text
+            : const Text(
+                "Login with Google",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
+              ),
       ),
     );
   }
