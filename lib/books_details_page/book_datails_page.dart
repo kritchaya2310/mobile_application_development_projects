@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import '../homepage/homepage.dart';
 
 class BookDetailsPage extends StatelessWidget {
@@ -99,7 +100,8 @@ class BookDetailsPage extends StatelessWidget {
               );
             },
           ),
-          backgroundColor: Colors.blue[400], // Change to transparent
+          backgroundColor: Colors.blue[400],
+          // Change to transparent
           elevation: 0,
           centerTitle: true,
           title: Text(

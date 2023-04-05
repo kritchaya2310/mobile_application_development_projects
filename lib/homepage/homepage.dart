@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_application_development_projects/homepage/items_search.dart';
 import '../add_items/add_items_page.dart';
