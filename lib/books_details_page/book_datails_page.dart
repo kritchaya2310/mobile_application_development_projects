@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
-
 import '../homepage/homepage.dart';
 
 class BookDetailsPage extends StatelessWidget {
-  const BookDetailsPage({super.key});
+  const BookDetailsPage({
+    Key? key,
+    required this.bookName,
+    required this.description,
+    required this.contact,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  final String bookName;
+  final String description;
+  final String contact;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +108,7 @@ class BookDetailsPage extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.network(
-                          "https://media.discordapp.net/attachments/1054360948460232724/1078741448431779870/the-calculus-affair.png?width=439&height=585",
+                          imageUrl,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -135,7 +145,7 @@ class BookDetailsPage extends StatelessWidget {
                     width: 800,
                     height: 50,
                     child: Text(
-                      'The Calculus Affair',
+                      bookName,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -163,7 +173,7 @@ class BookDetailsPage extends StatelessWidget {
                     width: 320,
                     height: 800,
                     child: Text(
-                      "Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description__Description_",
+                      description,
                     ),
                   ),
                 ),
@@ -176,7 +186,7 @@ class BookDetailsPage extends StatelessWidget {
                     width: 320,
                     height: 800,
                     child: Text(
-                      "Contact: 080-888 8888\nFacebook: Mana Nukruk",
+                      contact,
                     ),
                   ),
                 ),

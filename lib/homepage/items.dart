@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../books_details_page/book_datails_page.dart';
 
 final firestore = FirebaseFirestore.instance;
@@ -26,6 +25,8 @@ class Items extends StatelessWidget {
         return Column(
           children: books.map((book) {
             var bookname = book.get('b_name');
+            var description = book.get('b_desc');
+            var contact = book.get('b_contact');
 
             return Column(
               children: [
@@ -34,7 +35,12 @@ class Items extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BookDetailsPage()),
+                          builder: (context) => BookDetailsPage(
+                                bookName: bookname,
+                                description: description,
+                                contact: contact,
+                                imageUrl: book.get('b_image_url'),
+                              )),
                     ),
                   },
                   leading: Container(
