@@ -1,9 +1,8 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../homepage/homepage.dart';
 
 class AddItems extends StatefulWidget {
@@ -29,17 +28,36 @@ class _AddItemsState extends State<AddItems> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Future<void> _uploadData() async {
     final String bookName = _bNameController.text.trim();
     final String description = _descriptionController.text.trim();
     final String contact = _contactController.text.trim();
 
+    // Upload the image file to Firebase Storage
+    String? imageUrl;
+    if (_imageFile != null) {
+      try {
+        final snapshot = await _storage
+            .ref()
+            .child('images/${DateTime.now().millisecondsSinceEpoch}.jpg')
+            .putFile(_imageFile!);
+        imageUrl = await snapshot.ref.getDownloadURL();
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error uploading image: $e')),
+        );
+        return;
+      }
+    }
+
     try {
       await _firestore.collection('books').add({
         'b_name': bookName,
         'b_desc': description,
         'b_contact': contact,
+        'b_image_url': imageUrl,
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -214,10 +232,10 @@ class _AddItemsState extends State<AddItems> {
                         ),
                         onPressed: () {
                           _uploadData();
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => const HomePage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()));
                         },
                         child: Text(
                           "Confirm",
