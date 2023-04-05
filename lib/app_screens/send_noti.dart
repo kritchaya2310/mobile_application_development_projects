@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/cupertino.dart';
 
 class SendNoti extends StatefulWidget {
   const SendNoti({Key? key}) : super(key: key);
@@ -11,16 +13,60 @@ class SendNoti extends StatefulWidget {
 
 class _SendNotiState extends State<SendNoti> {
   String? mToken = " ";
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationPlugin =
+      FlutterLocalNotificationsPlugin();
   TextEditingController username = TextEditingController();
   TextEditingController title = TextEditingController();
   TextEditingController body = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    requestPermission(); // <---for notification
-    getToken(); //<---connect to firebase
-    // initInfo(); // <---load other information that we need
+  void initInfo() {
+    var androidInitialize =
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettings = InitializationSettings(
+        android: androidInitialize,
+        iOS: null // if you don't need iOS initialization
+        );
+    // flutterLocalNotificationPlugin.initialize(initializationSettings,
+    //     onDidReceiveLocalNotification:
+    //         (int id, String? title, String? body, String? payload) async {
+    //   try {
+    //     if (payload != null && payload.isNotEmpty) {
+    //       //
+    //     } else {
+    //       //
+    //     }
+    //   } catch (e) {
+    //     //
+    //   }
+    // });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+      print('................onMessage................');
+      print(
+          'onMessage: ${message.notification?.title}/${message.notification?.body}');
+
+      BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
+        message.notification!.body.toString(),
+        htmlFormatBigText: true,
+        contentTitle: message.notification!.title.toString(),
+        htmlFormatContentTitle: true,
+      );
+
+      AndroidNotificationDetails androidPlatformChannelSpecifics =
+          AndroidNotificationDetails(
+        "dbfood",
+        "dbfood",
+        importance: Importance.high,
+        styleInformation: bigTextStyleInformation,
+        priority: Priority.high,
+        playSound: true,
+      );
+
+      NotificationDetails platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+      await flutterLocalNotificationPlugin.show(1, message.notification?.title,
+          message.notification?.body, platformChannelSpecifics);
+    });
   }
 
   void getToken() async {
