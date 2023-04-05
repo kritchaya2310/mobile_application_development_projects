@@ -123,22 +123,8 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } else {
-      return ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) => Column(
-          children: [
-            Text("Searched"),
-            SizedBox(
-              height: 20,
-            ),
-            ItemSearch(
-              query: _searchQuery,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+      return ItemSearch(
+        query: _searchQuery,
       );
     }
   }

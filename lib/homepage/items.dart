@@ -58,7 +58,7 @@ class Items extends StatelessWidget {
                     ),
                   ),
                   title: Text(bookname),
-                  subtitle: Text(book.get('b_user')), // <-----------------
+                  subtitle: Text(book.get('b_user')),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                     side: BorderSide(color: Colors.black, width: 3),

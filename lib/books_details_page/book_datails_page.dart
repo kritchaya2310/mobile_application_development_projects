@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../homepage/homepage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -24,7 +25,7 @@ class BookDetailsPage extends StatelessWidget {
 
     void _sendNotificationToOwner() {
       String ownerToken =
-          "YOUR_OWNER_TOKEN_HERE"; // replace with owner's FCM token
+          "Z3r2SclLIngQfEaBecWOzHZ7K7s1"; // replace with owner's FCM token
 
       _firebaseMessaging.sendMessage(
         to: ownerToken,
@@ -126,7 +127,7 @@ class BookDetailsPage extends StatelessWidget {
                       width: 140,
                       height: 215,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         child: Image.network(
                           imageUrl,
                           fit: BoxFit.cover,
@@ -215,18 +216,15 @@ class BookDetailsPage extends StatelessWidget {
                     width: 320,
                     height: 100,
                     child: Container(
-                      padding: const EdgeInsets.all(7),
-                      width: 300,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.black, width: 3),
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Text(
-                        contact,
-                      ),
-                    ),
+                        padding: const EdgeInsets.all(7),
+                        width: 300,
+                        height: 10,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.black, width: 3),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Text(contact)),
                   ),
                 ),
               ),
