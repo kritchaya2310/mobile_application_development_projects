@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import '../books_details_page/book_datails_page.dart';
 import 'inputfield_search.dart';
 
@@ -23,7 +24,18 @@ class ItemSearch extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text('Loading...');
+          return SingleChildScrollView(
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Text('Loading...'),
+              ],
+            )),
+          );
         }
 
         // Filter the books based on the search query
@@ -33,7 +45,20 @@ class ItemSearch extends StatelessWidget {
             .toList();
 
         return books.isEmpty
-            ? Text('No results found')
+            ? SingleChildScrollView(
+                child: Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Text('No results found'),
+                    Lottie.network(
+                        'https://assets8.lottiefiles.com/private_files/lf30_e3pteeho.json')
+                  ],
+                )),
+              )
             : ListView.builder(
                 itemCount: books.length,
                 itemBuilder: (context, index) {
@@ -42,6 +67,7 @@ class ItemSearch extends StatelessWidget {
                   var description = book.get('b_desc');
                   var contact = book.get('b_contact');
                   var username = book.get('b_user');
+                  var path = book.get('b_docs_path');
 
                   return Column(
                     children: [
@@ -56,6 +82,7 @@ class ItemSearch extends StatelessWidget {
                                 contact: contact,
                                 imageUrl: book.get('b_image_url'),
                                 user: username,
+                                path: path,
                               ),
                             ),
                           ),

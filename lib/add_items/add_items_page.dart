@@ -37,7 +37,7 @@ class _AddItemsState extends State<AddItems> {
     final String description = _descriptionController.text.trim();
     final String contact = _contactController.text.trim();
 
-    // Upload the image file to Firebase Storage
+//////////////////////////////////////////////////////////////////////////////////////////
     String? imageUrl;
     if (_imageFile != null) {
       try {
@@ -55,12 +55,14 @@ class _AddItemsState extends State<AddItems> {
     }
 
     try {
-      await _firestore.collection('books').add({
+      final docPath = _firestore.collection('books').doc().id;
+      final docRef = await _firestore.collection('books').doc(docPath).set({
         'b_name': bookName,
         'b_desc': description,
         'b_contact': contact,
         'b_image_url': imageUrl,
         'b_user': email,
+        'b_docs_path': docPath,
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
